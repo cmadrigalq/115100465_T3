@@ -1,0 +1,355 @@
+openapi: 3.0.0
+info:
+  title: Books API
+  description: This web service offers information on books
+  version: 0.1.9
+servers:
+- url: http://webservice_booksapps.netlify.org
+  description: Tarea 3 Sistemas Distribuidos UNA.
+paths:
+  /books/{bookId}:
+    get:
+      summary: Returns a book by ID.
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    put:
+      summary: Update book information
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Book data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete a book by ID.
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /books/:
+    post:
+      summary: Create a new book
+      requestBody:
+        description: Book data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /authors/{authorId}:
+    get:
+      summary: Returns a author by ID.
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    put:
+      summary: Update author information
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Author data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete a author by ID.
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /authors/:
+    post:
+      summary: Create a new author
+      requestBody:
+        description: Author data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /publishers/{publisherId}:
+    get:
+      summary: Returns a publisher by ID.
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+    put:
+      summary: Update publisher information
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Publisher data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      summary: Delete a publisher by ID.
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /publishers/:
+    post:
+      summary: Create a new publisher
+      requestBody:
+        description: Publisher data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /books/{bookId}/authors:
+    get:
+      summary: Get Authors by book id
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorsCollection'
+  /authors/{authorId}/books:
+    get:
+      summary: Get book by author id
+      parameters:
+      - name: authorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+  /books/{bookId}/publishers:
+    get:
+      summary: Get Publisher by book id
+      parameters:
+      - name: bookId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+  /publisher/{publisherId}/books:
+    get:
+      summary: Get books by publisher id
+      parameters:
+      - name: publisherId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BooksCollection'
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        bookId:
+          type: string
+        publisherId:
+          type: string
+        title:
+          type: string
+        edition:
+          type: string
+        copyright:
+          type: string
+        language:
+          type: string
+        pages:
+          type: string
+      example:
+        bookId: book01
+        copyright: "2015"
+        pages: "1054"
+        edition: 4th
+        publisherId: publisher01
+        language: ENGLISH
+        title: Database System
+    Author:
+      type: object
+      properties:
+        authorId:
+          type: string
+        bookId:
+          type: string
+        name:
+          type: string
+        nationality:
+          type: string
+        birth:
+          type: string
+        genere:
+          type: string
+      example:
+        authorId: author01
+        bookId: book01
+        nationality: EE.UU
+        name: Abraham Silberschatz
+        birth: "1976"
+        genere: M
+    Publisher:
+      type: object
+      properties:
+        publisherId:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        founded:
+          type: string
+        genere:
+          type: string
+      example:
+        country: EE.UU
+        publisherId: publisher01
+        name: 'John Wiley & Sons '
+        founded: "1807"
+        genere: Var
+    BooksCollection:
+      type: array
+      items:
+        type: object
+        additionalProperties:
+          $ref: '#/components/schemas/Book'
+      x-schema-name: BooksCollection
+    AuthorsCollection:
+      type: array
+      items:
+        type: object
+        additionalProperties:
+          $ref: '#/components/schemas/Author'
+      x-schema-name: AuthorsCollection
